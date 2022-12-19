@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Номера</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/ClientHeader"></div>
+<div class="container">
+    <form>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-6">
+                    <input type="text" name="number" class="form-control" placeholder="Номер"/>
+                    <input type="hidden" name="tariffName" th:value="${tariff.name}"/>
+                </div>
+                <div class="col col-lg-3">
+                    <input class="btn btn-success" formmethod="get" type="submit" formaction="/client/phoneNumberFilter"
+                           value="Поиск"/>
+                </div>
+            </div>
+        </div>
+    </form>
+    <h1>Номера</h1>
+    <div class="card card_margin mb-2" th:if="${phoneNumber.status==true}" th:each="phoneNumber : ${phoneNumbers}">
+        <div class="card-header">
+            <h3 class="card-title" th:text="${phoneNumber.number}"/>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title" th:text="${'тариф '+phoneNumber.tariff.name}"/>
+        </div>
+        <div class="card-footer">
+            <h5 class="card-title" th:text="${phoneNumber.tariff.priceMount+50+'₽'} "/>
+        </div>
+        <div class="btn-group">
+            <form th:action="@{/templates/clientPage/bookingCreatePhoneNumber}" method="post">
+                <input type="hidden" th:value="${phoneNumber.idPhoneNumber}" name="idPhoneNumber">
+                <input value="Выбрать" type="submit" class="btn btn-outline-dark">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

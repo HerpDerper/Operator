@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Статистика продаж номеров</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="shadow-lg rounded-lg overflow-hidden" style="width: 50%; height: 50%">
+    <canvas class="p-10" id="chartDoughnut"></canvas>
+</div>
+<script th:inline="javascript">
+    var tariffs = /*[[${tariffs}]]*/;
+    var clientNumbers = /*[[${clientNumbers}]]*/;
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const dataDoughnut = {
+        labels: tariffs,
+        datasets: [
+            {
+                label: "My First Dataset",
+                data: clientNumbers,
+                hoverOffset: 4,
+            },
+        ],
+    };
+    const configDoughnut = {
+        type: "doughnut",
+        data: dataDoughnut,
+        options: {},
+    };
+    var chartBar = new Chart(
+        document.getElementById("chartDoughnut"),
+        configDoughnut
+    );
+</script>
+</body>
+</html>

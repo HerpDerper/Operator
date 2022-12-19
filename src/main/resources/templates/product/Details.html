@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Информация о товаре</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/AdminHeader"></div>
+<div class="container">
+    <dl class="row">
+        <dd class="col-sm-10">
+            <img class="rounded img-fluid pt-4 align-center" th:src="'/image/' + ${product.image.idImage}" alt="">
+        </dd>
+        <dd class="col-sm-10">
+            Наименование: <a th:text="${product.name}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Описание: <a th:text="${product.description}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Цена: <a th:text="${product.price}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Количество: <a th:text="${product.count}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Характеристика: <a th:text="${product.characteristic}"/>
+        </dd>
+        <div class="col-sm-10">
+            <a class="btn btn-danger" href="/product/index">Назад</a>
+        </div>
+    </dl>
+</div>
+</body>
+</html>

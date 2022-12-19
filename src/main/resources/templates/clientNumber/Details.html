@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Информация о клиенте</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/AdminHeader"></div>
+<div class="container">
+    <dl class="row">
+        <dd class="col-sm-10">
+            Номер телефона: <a th:text="${clientNumber.phoneNumber.number}"/>
+        </dd>
+        <dd class="col-sm-10">
+            ICCID: <a th:text="${clientNumber.phoneNumber.ICCID}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Тариф: <a th:text="${clientNumber.phoneNumber.tariff.name}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Фамилия: <a th:text="${clientNumber.client.passportData.surname}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Имя: <a th:text="${clientNumber.client.passportData.name}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Отчество: <a th:text="${clientNumber.client.passportData.patronymic}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Дата рождения: <a th:text="${clientNumber.client.passportData.dateBirth}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Место рождения: <a th:text="${clientNumber.client.passportData.placeBirth}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Код подразделения выдачи паспорта: <a th:text="${clientNumber.client.passportData.issueDate}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Кем выдан паспорт: <a th:text="${clientNumber.client.passportData.issued}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Дата выдачи паспорта: <a th:text="${clientNumber.client.passportData.issueDate}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Серия паспорта: <a th:text="${clientNumber.client.passportData.passportSeries}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Номер паспорта: <a th:text="${clientNumber.client.passportData.passportNumber}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Адрес прописки: <a th:text="${clientNumber.client.address}"/>
+        </dd>
+        <div class="col-sm-10">
+            <a class="btn btn-danger" href="/clientNumber/index">Назад</a>
+        </div>
+    </dl>
+</div>
+</body>
+</html>

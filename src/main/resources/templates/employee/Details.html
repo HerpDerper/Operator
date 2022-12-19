@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Информация о сотруднике</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/AdminHeader"></div>
+<div class="container">
+    <dl class="row">
+        <dd class="col-sm-10">
+            Логин: <a th:text="${employee.user.username}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Фамилия: <a th:text="${employee.passportData.surname}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Имя: <a th:text="${employee.passportData.name}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Отчество: <a th:text="${employee.passportData.patronymic}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Дата рождения: <a th:text="${employee.passportData.dateBirth}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Место рождения: <a th:text="${employee.passportData.placeBirth}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Код подразделения выдачи паспорта: <a th:text="${employee.passportData.issueDate}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Кем выдан паспорт: <a th:text="${employee.passportData.issued}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Дата выдачи паспорта: <a th:text="${employee.passportData.issueDate}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Серия паспорта: <a th:text="${employee.passportData.passportSeries}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Номер паспорта: <a th:text="${employee.passportData.passportNumber}"/>
+        </dd>
+        <dd class="col-sm-10">
+            СНИЛС: <a th:text="${employee.SNILS}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Номер телефона: <a th:text="${employee.phone}"/>
+        </dd>
+        <dd class="col-sm-10">
+            Email: <a th:text="${employee.email}"/>
+        </dd>
+        <div class="col-sm-10">
+            <a class="btn btn-danger" href="/employee/index">Назад</a>
+        </div>
+    </dl>
+</div>
+</body>
+</html>

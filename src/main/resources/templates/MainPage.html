@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Главная страница</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:if="${adminAccess}" th:insert="headers/AdminHeader"></div>
+<div th:if="${sellerAccess}" th:insert="headers/SellerHeader"></div>
+<div th:if="${clientAccess}" th:insert="headers/ClientHeader"></div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Изменение сотрудника</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/AdminHeader"></div>
+<div class="container">
+    <h1>Сотрудник</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <form th:action="${'/employee/editEmployee'}" method="post" th:object="${employee}" class="form col-sm-3">
+                <input type="hidden" name="idEmployee" th:value="*{idEmployee}"/>
+                <div th:object="${user}">
+                    <input type="hidden" name="idUser" th:value="*{idUser}"/>
+                    <div class="form-group pt-1">
+                        <input type="hidden" name="password" th:value="*{password}"/>
+                        <label class="control-label">Логин<input type="text" class="form-control"
+                                                                 th:field="*{username}"></label>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('username')}"
+                             th:errors="*{username}"></div>
+                        <span class="error text-danger" th:if="errorMessageUsername!=null"
+                              th:text="${errorMessageUsername}"></span>
+                        <label class="control-label">Логин<input type="text" class="form-control"
+                                                                 th:field="*{password}"></label>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('password')}"
+                             th:errors="*{password}"></div>
+                    </div>
+                </div>
+                <div th:object="${passportData}">
+                    <input type="hidden" name="idPassportData" th:value="*{idPassportData}"/>
+                    <div class="form-group pt-1">
+                        <label class="control-label">Фамилия<input type="text" class="form-control"
+                                                                   th:field="*{surname}"></label>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('surname')}"
+                             th:errors="*{surname}"></div>
+                    </div>
+                    <div class="form-group pt-1">
+                        <label class="control-label">Имя<input type="text" class="form-control"
+                                                               th:field="*{name}"></label>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                    </div>
+                    <div class="form-group pt-1">
+                        <label class="control-label">Отчество<input type="text" class="form-control"
+                                                                    th:field="*{patronymic}"></label>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('patronymic')}"
+                             th:errors="*{patronymic}"></div>
+                    </div>
+                    <div class="form-group pt-1">
+                        <label class="control-label">Дата рождения<input type="date" class="form-control"
+                                                                         th:field="*{dateBirth}"></label>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('dateBirth')}"
+                             th:errors="*{dateBirth}"></div>
+                    </div>
+                    <div class="form-group pt-1">
+                        <label class="control-label">Место рождения<input type="text" class="form-control"
+                                                                          th:field="*{placeBirth}"></label>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('placeBirth')}"
+                             th:errors="*{placeBirth}"></div>
+                    </div>
+                    <div class="form-group pt-1">
+                        <label class="control-label">Код подразделения выдачи<input type="text" class="form-control"
+                                                                                    th:field="*{issueCode}"></label>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('issueCode')}"
+                             th:errors="*{issueCode}"></div>
+                    </div>
+                    <div class="form-group pt-1">
+                        <label class="control-label">Кем выдан паспорт<input type="text" class="form-control"
+                                                                             th:field="*{issued}"></label>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('issued')}"
+                             th:errors="*{issued}"></div>
+                    </div>
+                    <div class="form-group pt-1">
+                        <label class="control-label">Дата выдачи<input type="date" class="form-control"
+                                                                       th:field="*{issueDate}"></label>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('issueDate')}"
+                             th:errors="*{issueDate}"></div>
+                        <span class="error text-danger" th:if="errorMessageIssueDate!=null"
+                              th:text="${errorMessageIssueDate}"></span>
+                    </div>
+                    <div class="form-group pt-1">
+                        <label class="control-label">Серия паспорта<input type="text" class="form-control"
+                                                                          th:field="*{passportSeries}"></label>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('passportSeries')}"
+                             th:errors="*{passportSeries}"></div>
+                    </div>
+                    <div class="form-group pt-1">
+                        <label class="control-label">Номер паспорта<input type="text" class="form-control"
+                                                                          th:field="*{passportNumber}"></label>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('passportNumber')}"
+                             th:errors="*{passportNumber}"></div>
+                    </div>
+                </div>
+                <div class="form-group pt-1">
+                    <label class="control-label">СНИЛС<input type="text" class="form-control"
+                                                             th:field="*{SNILS}"></label>
+                    <div class="error text-danger" th:if="${#fields.hasErrors('SNILS')}" th:errors="*{SNILS}"></div>
+                </div>
+                <div class="form-group pt-1">
+                    <label class="control-label">Номер телефона<input type="text" class="form-control"
+                                                                      th:field="*{phone}"></label>
+                    <div class="error text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+                </div>
+                <div class="form-group pt-1">
+                    <label class="control-label">Email<input type="text" class="form-control"
+                                                             th:field="*{email}"></label>
+                    <div class="error text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                </div>
+                <div class="form-group m-lg-1">
+                    <button class="btn btn-success" type="submit">Изменить</button>
+                    <a class="btn btn-danger" href="/employee/index">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

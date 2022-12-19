@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Клиенты</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/AdminHeader"></div>
+<div class="container">
+    <a class="btn btn-primary" href="/clientNumber/chart" style="margin-bottom:0.5em">Статистика</a>
+    <form>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-6">
+                    <input type="text" name="number" class="form-control" placeholder="Номер"/>
+                </div>
+                <div class="col col-lg-3">
+                    <input class="btn btn-success" formmethod="get" type="submit" formaction="/clientNumber/filter"
+                           value="Поиск"/>
+                </div>
+            </div>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="text-center">Фамилия</th>
+            <th class="text-center">Имя</th>
+            <th class="text-center">Отчество</th>
+            <th class="text-center">Адрес</th>
+            <th class="text-center">Номер телефона</th>
+            <th class="text-center">Детали</th>
+        </tr>
+        </thead>
+        <tbody th:each="clientNumber : ${clientNumbers}">
+        <tr>
+            <td class="text-center" th:text="${clientNumber.client.passportData.surname}"/>
+            <td class="text-center" th:text="${clientNumber.client.passportData.name}"/>
+            <td class="text-center" th:text="${clientNumber.client.passportData.patronymic}"/>
+            <td class="text-center" th:text="${clientNumber.client.address}"/>
+            <td class="text-center" th:text="${clientNumber.phoneNumber.number}"/>
+            <td class="text-center">
+                <form th:action="@{/clientNumber/details}" method="post">
+                    <input value="Детали" type="submit" class="btn btn-outline-primary">
+                    <input type="hidden" th:value="${clientNumber.idClientNumber}" name="idClientNumber">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

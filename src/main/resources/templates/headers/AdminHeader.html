@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="/employee/index">OperatorT2F</a>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/employee/index">Сотрудники</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/clientNumber/index">Клиенты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/product/index">Товары</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tariff/index">Тарифы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/phoneNumber/index">Номера</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cheque/index">Проданные товары</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/database/index">Управление базой данных</a>
+                    </li>
+                </ul>
+                <div class="col col-lg-3">
+                    <form th:action="@{/logout}" method="post">
+                        <input class="btn btn-danger" type="submit" value="Выйти">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

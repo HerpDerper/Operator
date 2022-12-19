@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Номера</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/AdminHeader"></div>
+<div class="container">
+    <form>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-6">
+                    <input type="text" name="number" class="form-control" placeholder="Номер"/>
+                </div>
+                <div class="col col-lg-3">
+                    <input class="btn btn-success" formmethod="get" type="submit" formaction="/phoneNumber/filter"
+                           value="Поиск"/>
+                </div>
+            </div>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="text-center">Номер</th>
+            <th class="text-center">ICCID</th>
+            <th class="text-center">PUK</th>
+            <th class="text-center">Тариф</th>
+            <th class="text-center">Статус</th>
+            <th class="text-center">Сменить статус</th>
+        </tr>
+        </thead>
+        <tbody th:each="phoneNumber : ${phoneNumbers}">
+        <tr>
+            <td class="text-center" th:text="${phoneNumber.number}"/>
+            <td class="text-center" th:text="${phoneNumber.ICCID}"/>
+            <td class="text-center" th:text="${phoneNumber.PUK}"/>
+            <td class="text-center" th:text="${phoneNumber.tariff.name}"/>
+            <td class="text-center" th:if="${phoneNumber.isStatus()==true}" th:text="Активен"/>
+            <td class="text-center" th:if="${phoneNumber.isStatus()==false}" th:text="Блокирован"/>
+            <td class="text-center">
+                <form th:action="@{/phoneNumber/editStatus}" method="post">
+                    <input value="Заблокировать" th:if="${phoneNumber.isStatus()==true}" type="submit"
+                           class="btn btn-outline-dark">
+                    <input value="Разблокировать" th:if="${phoneNumber.isStatus()==false}" type="submit"
+                           class="btn btn-outline-dark">
+                    <input type="hidden" th:value="${phoneNumber.idPhoneNumber}" name="idPhoneNumber">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

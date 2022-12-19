@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Изменение тарифа</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/AdminHeader"></div>
+<div class="container">
+    <h1>Тариф</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <form th:action="${'/tariff/editTariff'}" method="post" th:object="${tariff}" class="form col-sm-3">
+                <input type="hidden" name="idTariff" th:value="*{idTariff}"/>
+                <input type="hidden" name="priceMount" th:value="*{priceMount}"/>
+                <input type="hidden" name="minutes" th:value="*{minutes}"/>
+                <input type="hidden" name="GB" th:value="*{GB}"/>
+                <input type="hidden" name="SMS" th:value="*{SMS}"/>
+                <div class="form-group pt-1">
+                    <label class="control-label">Наименование<input type="text" class="form-control" th:field="*{name}"></label>
+                    <div class="error text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+                <span class="error text-danger" th:if="errorMessage!=null" th:text="${errorMessage}"></span>
+                <div class="form-group m-lg-1">
+                    <button class="btn btn-success" type="submit">Изменить</button>
+                    <a class="btn btn-danger" href="/tariff/index">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

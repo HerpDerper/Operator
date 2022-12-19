@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Изменение товара</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/AdminHeader"></div>
+<div class="container">
+    <h1>Товар</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <form th:action="${'/product/editProduct'}" method="post" th:object="${product}" class="form col-sm-3"
+                  enctype="multipart/form-data">
+                <input type="hidden" name="idProduct" th:value="*{idProduct}"/>
+                <input type="hidden" name="characteristic" th:value="*{characteristic}"/>
+                <div class="form-group pt-1">
+                    <label class="control-label">Наименование<input type="text" class="form-control" th:field="*{name}"></label>
+                    <div class="error text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+                <div class="form-group pt-1">
+                    <label class="control-label">Описание<input type="text" class="form-control"
+                                                                th:field="*{description}"></label>
+                    <div class="error text-danger" th:if="${#fields.hasErrors('description')}"
+                         th:errors="*{description}"></div>
+                </div>
+                <div class="form-group pt-1">
+                    <label class="control-label">Цена<input type="number" class="form-control"
+                                                            th:field="*{price}"></label>
+                    <div class="error text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+                </div>
+                <div class="form-group pt-1">
+                    <label class="control-label">Количество<input type="number" class="form-control"
+                                                                  th:field="*{count}"></label>
+                    <div class="error text-danger" th:if="${#fields.hasErrors('count')}" th:errors="*{count}"></div>
+                </div>
+                <div class="form-group pt-1">
+                    <label class="control-label">Изображение<input type="file" accept="image/png, image/jpg, image/jpeg"
+                                                                   class="form-control"
+                                                                   name="file"></label>
+                </div>
+                <span class="error text-danger" th:if="errorMessage!=null" th:text="${errorMessage}"></span>
+                <div class="form-group m-lg-1">
+                    <button class="btn btn-success" type="submit">Изменить</button>
+                    <a class="btn btn-danger" href="/product/index">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>В продаже</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/ClientHeader"></div>
+<div class="container">
+    <form>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-6">
+                    <input type="text" name="name" class="form-control" placeholder="Название"/>
+                </div>
+                <div class="col col-lg-3">
+                    <input class="btn btn-success" formmethod="get" type="submit" formaction="/client/productFilter"
+                           value="Поиск"/>
+                </div>
+            </div>
+        </div>
+    </form>
+    <h1>Товары</h1>
+    <div class="card card_margin mb-2" th:each="product : ${products}">
+        <div class="card-header">
+            <h4 class="card-title" th:text="${product.name}"/>
+        </div>
+        <div class="card-body">
+            <img class="rounded img-fluid pt-4 align-center" th:src="'/image/' + ${product.image.idImage}" alt="">
+            <h6 class="card-title" th:text="${product.description}"/>
+        </div>
+        <div class="card-footer">
+            <h6 class="card-title" th:text="${product.price+'₽'}"/>
+            <h6 class="card-title" th:if="${product.count==0}" th:text="${'Временно отсутствует в продаже'} "/>
+        </div>
+        <div class="btn-group">
+            <form th:action="@{/templates/clientPage/bookingCreateProduct}" method="post">
+                <input type="hidden" th:value="${product.idProduct}" name="idProduct">
+                <input value="Заказать" type="submit" class="btn btn-outline-dark">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

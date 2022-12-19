@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Тарифы</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/AdminHeader"></div>
+<div class="container">
+    <a class="btn btn-primary" href="/tariff/create" style="margin-bottom:0.5em">Добавить</a>
+    <form>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-6">
+                    <input type="text" name="name" class="form-control" placeholder="Наименование"/>
+                </div>
+                <div class="col col-lg-3">
+                    <input class="btn btn-success" formmethod="get" type="submit" formaction="/tariff/filter"
+                           value="Поиск"/>
+                </div>
+            </div>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="text-center">Наименование</th>
+            <th class="text-center">Цена в месяц</th>
+            <th class="text-center">Количество минут</th>
+            <th class="text-center">Количество ГБ</th>
+            <th class="text-center">Количество SMS</th>
+            <th class="text-center">Редактировать</th>
+        </tr>
+        </thead>
+        <tbody th:each="tariff : ${tariffs}">
+        <tr>
+            <td class="text-center" th:text="${tariff.name}"/>
+            <td class="text-center" th:text="${tariff.priceMount}"/>
+            <td class="text-center" th:text="${tariff.minutes}"/>
+            <td class="text-center" th:text="${tariff.GB}"/>
+            <td class="text-center" th:text="${tariff.SMS}"/>
+            <td class="text-center">
+                <form th:action="@{/tariff/edit}" method="post">
+                    <input value="Редактировать" type="submit" class="btn btn-outline-warning">
+                    <input type="hidden" th:value="${tariff.idTariff}" name="idTariff">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

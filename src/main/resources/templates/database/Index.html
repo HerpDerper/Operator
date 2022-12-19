@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Управление базой данных</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/AdminHeader"></div>
+<div class="container">
+    <div class="d-flex container flex-row align-items-center justify-content-center mt-3 col-sm-8">
+        <form method="get" th:action="@{/database/downloadScript}"
+              class="form-horizontal d-flex flex-row align-items-center justify-content-between col-sm-4">
+            <div class="form-check">
+                <input class="form-check-input" name="withData" type="checkbox" value="1" id="flexCheck" checked>
+                <label class="form-check-label" for="flexCheck">Скрипт с данными</label>
+            </div>
+            <input type="submit" value="Скачать скрипт" class="btn btn-success margin-left">
+        </form>
+        <form method="get" th:action="@{/database/createBackup}"
+              class="form-horizontal d-flex flex-column align-items-center justify-content-center col-sm-4">
+            <input type="submit" value="Создать резервную копию" class="btn btn-success">
+        </form>
+    </div>
+    <form method="post" th:action="@{/database/uploadBackup}" enctype="multipart/form-data"
+          class="row justify-content-md-center">
+        <div class="col col-lg-4">
+            <input type="file" name="file" class="form-control" accept=".sql">
+        </div>
+        <div class="col col-lg-3">
+            <input type="submit" value="Загрузить резервную копию" class="btn btn-primary">
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="text-center">Название</th>
+            <th class="text-center">Восстановить</th>
+            <th class="text-center">Удалить</th>
+        </tr>
+        </thead>
+        <tbody th:each="file : ${files}">
+        <tr>
+            <td class="text-center" th:text="${file}"/>
+            <td class="text-center">
+                <form th:action="@{/database/restoreBackup}" method="post">
+                    <input value="Восстановить" type="submit" class="btn btn-outline-primary">
+                    <input type="hidden" th:value="${file}" name="fileName">
+                </form>
+            </td>
+            <td class="text-center">
+                <form th:action="@{/database/deleteBackup}" method="post">
+                    <input value="Удалить" type="submit" class="btn btn-outline-danger">
+                    <input type="hidden" th:value="${file}" name="fileName">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

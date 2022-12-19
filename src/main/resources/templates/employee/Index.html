@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Сотрудники</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/AdminHeader"></div>
+<div class="container">
+    <a class="btn btn-primary" href="/employee/create" style="margin-bottom:0.5em">Добавить</a>
+    <form>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-6">
+                    <input type="text" name="email" class="form-control" placeholder="Email"/>
+                </div>
+                <div class="col col-lg-3">
+                    <input class="btn btn-success" formmethod="get" type="submit" formaction="/employee/filter"
+                           value="Поиск"/>
+                </div>
+            </div>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="text-center">Фамилия</th>
+            <th class="text-center">Имя</th>
+            <th class="text-center">Отчество</th>
+            <th class="text-center">СНИЛС</th>
+            <th class="text-center">Номер телефона</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Логин</th>
+            <th class="text-center">Редактировать</th>
+            <th class="text-center">Удалить</th>
+            <th class="text-center">Детали</th>
+        </tr>
+        </thead>
+        <tbody th:each="employee : ${employees}">
+        <tr>
+            <td class="text-center" th:text="${employee.passportData.surname}"/>
+            <td class="text-center" th:text="${employee.passportData.name}"/>
+            <td class="text-center" th:text="${employee.passportData.patronymic}"/>
+            <td class="text-center" th:text="${employee.SNILS}"/>
+            <td class="text-center" th:text="${employee.phone}"/>
+            <td class="text-center" th:text="${employee.email}"/>
+            <td class="text-center" th:text="${employee.user.username}"/>
+            <td class="text-center">
+                <form th:action="@{/employee/edit}" method="post">
+                    <input value="Редактировать" type="submit" class="btn btn-outline-warning">
+                    <input type="hidden" th:value="${employee.idEmployee}" name="idEmployee">
+                </form>
+            </td>
+            <td class="text-center">
+                <form th:if="${employee.user.active}" th:action="@{/employee/delete}" method="post">
+                    <input value="Удалить" type="submit" class="btn btn-outline-danger">
+                    <input type="hidden" th:value="${employee.idEmployee}" name="idEmployee">
+                </form>
+            </td>
+            <td class="text-center">
+                <form th:action="@{/employee/details}" method="post">
+                    <input value="Детали" type="submit" class="btn btn-outline-primary">
+                    <input type="hidden" th:value="${employee.idEmployee}" name="idEmployee">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

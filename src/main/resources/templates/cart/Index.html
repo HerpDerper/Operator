@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Товары</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/SellerHeader"></div>
+<div class="container">
+    <form th:action="${'/cart/search'}" method="post">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="row col-lg-6">
+                    <input type="text" name="name" list="products" class="form-control mb-1"
+                           placeholder="Наименование товара"/>
+                    <datalist id="products">
+                        <select th:each="product : ${products}">
+                            <option th:if="${product.count!=0}" th:value="${product.name}">
+                        </select>
+                    </datalist>
+                </div>
+                <div class="col col-lg-3">
+                    <input type="number" name="count" min="1" max="5" value="1" class="form-control"
+                           placeholder="Количество товара"/>
+                </div>
+                <div class="col col-lg-3">
+                    <input class="btn btn-success" type="submit" value="Добавить в список"/>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form th:if="${cartCount != 0}" th:action="${'/cheque/create'}" method="post">
+        <input class="btn btn-primary" type="submit" value="Оплата"/>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="text-center">Наименование</th>
+            <th class="text-center">Характеристика</th>
+            <th class="text-center">Цена</th>
+            <th class="text-center">Количество</th>
+            <th class="text-center">Итоговая цена</th>
+            <th class="text-center">Удалить</th>
+        </tr>
+        </thead>
+        <tbody th:each="cart : ${carts}">
+        <tr>
+            <td class="text-center" th:text="${cart.product.name}"/>
+            <td class="text-center" th:text="${cart.product.characteristic}"/>
+            <td class="text-center" th:text="${cart.product.price}"/>
+            <td class="text-center" th:text="${cart.productCount}"/>
+            <td class="text-center" th:text="${cart.productCount * cart.product.price}"/>
+            <td class="text-center">
+                <form th:action="@{/cart/delete}" method="post">
+                    <input value="Удалить" type="submit" class="btn btn-outline-danger">
+                    <input type="hidden" th:value="${cart.idCart}" name="idCart">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

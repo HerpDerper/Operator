@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Товары</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/AdminHeader"></div>
+<div class="container">
+    <a class="btn btn-primary" href="/product/create" style="margin-bottom:0.5em">Добавить</a>
+    <form>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-6">
+                    <input type="text" name="name" class="form-control" placeholder="Наименование"/>
+                </div>
+                <div class="col col-lg-3">
+                    <input class="btn btn-success" formmethod="get" type="submit" formaction="/product/filter"
+                           value="Поиск"/>
+                </div>
+            </div>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="text-center">Наименование</th>
+            <th class="text-center">Цена</th>
+            <th class="text-center">Количество</th>
+            <th class="text-center">Характеристика</th>
+            <th class="text-center">Редактировать</th>
+            <th class="text-center">Удалить</th>
+            <th class="text-center">Детали</th>
+        </tr>
+        </thead>
+        <tbody th:each="product : ${products}">
+        <tr>
+            <td class="text-center" th:text="${product.name}"/>
+            <td class="text-center" th:text="${product.price}"/>
+            <td class="text-center" th:text="${product.count}"/>
+            <td class="text-center" th:text="${product.characteristic}"/>
+            <td class="text-center">
+                <form th:action="@{/product/edit}" method="post">
+                    <input value="Редактировать" type="submit" class="btn btn-outline-warning">
+                    <input type="hidden" th:value="${product.idProduct}" name="idProduct">
+                </form>
+            </td>
+            <td class="text-center">
+                <form th:if="${product.count>0}" th:action="@{/product/delete}" method="post">
+                    <input value="Удалить" type="submit" class="btn btn-outline-danger">
+                    <input type="hidden" th:value="${product.idProduct}" name="idProduct">
+                </form>
+            </td>
+            <td class="text-center">
+                <form th:action="@{/product/details}" method="post">
+                    <input value="Детали" type="submit" class="btn btn-outline-primary">
+                    <input type="hidden" th:value="${product.idProduct}" name="idProduct">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

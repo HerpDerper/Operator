@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Тарифы</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/ClientHeader"></div>
+<div class="container">
+    <form th:action="@{/templates/clientPage/tariffSort}">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-6">
+                    <select name="sortProperty" class="form-control">
+                        <option th:value="Гигабайты" th:text="Гигабайты"></option>
+                        <option th:value="Минуты" th:text="Минуты"></option>
+                        <option th:value="Сообщения" th:text="Сообщения"></option>
+                        <option th:value="Цена" th:text="Цена"></option>
+                    </select>
+                </div>
+                <div class="col col-lg-3">
+                    <select name="sortType" class="form-control">
+                        <option th:value="false" th:text="Уменьшение"></option>
+                        <option th:value="true" th:text="Возрастание"></option>
+                    </select>
+                </div>
+                <div class="col col-lg-3">
+                    <input value="Сортировка" type="submit" class="btn btn-success">
+                </div>
+            </div>
+        </div>
+    </form>
+    <h1>Тарифы</h1>
+    <div class="card card_margin mb-2" th:each="tariff : ${tariffs}">
+        <div class="card-header">
+            <h4 class="card-title" th:text="${tariff.name}"/>
+        </div>
+        <div class="card-body">
+            <h6 class="card-title" th:text="${tariff.minutes+' минут'}"/>
+            <h6 class="card-title" th:if="${tariff.GB!=0}" th:text="${tariff.GB+' ГБ'}"/>
+            <h6 class="card-title" th:if="${tariff.SMS!=0}" th:text="${tariff.SMS+' SMS'}"/>
+        </div>
+        <div class="card-footer">
+            <h6 class="card-title" th:text="${tariff.priceMount+'₽ в месяц'} "/>
+        </div>
+        <div class="btn-group">
+            <form th:action="@{/templates/clientPage/phoneNumberIndex}" method="get">
+                <input type="hidden" th:value="${tariff.idTariff}" name="idTariff">
+                <input value="Выбрать" type="submit" class="btn btn-outline-dark">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

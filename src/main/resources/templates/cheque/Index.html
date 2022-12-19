@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Проданные товары</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
+    <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+</head>
+<body>
+<div th:insert="headers/AdminHeader"></div>
+<div class="container">
+    <form method="get" th:action="@{/cheque/generateExcel}">
+        <a th:href="@{/cheque/generateExcel}" class="btn btn-primary" style="margin-bottom:0.5em">Импорт в Excel
+            файл</a>
+    </form>
+    <form>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-6">
+                    <input type="text" name="name" class="form-control" placeholder="Наименование проданного товара"/>
+                </div>
+                <div class="col col-lg-3">
+                    <input class="btn btn-success" formmethod="get" type="submit" formaction="/cheque/filter"
+                           value="Поиск"/>
+                </div>
+            </div>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="text-center">Товар</th>
+            <th class="text-center">Характеристика</th>
+            <th class="text-center">Цена</th>
+            <th class="text-center">Количество</th>
+            <th class="text-center">Итоговая цена</th>
+            <th class="text-center">Сотрудник</th>
+        </tr>
+        </thead>
+        <tbody th:each="cheque : ${cheques}">
+        <tr>
+            <td class="text-center" th:text="${cheque.product.name}"/>
+            <td class="text-center" th:text="${cheque.product.characteristic}"/>
+            <td class="text-center" th:text="${cheque.product.price}"/>
+            <td class="text-center" th:text="${cheque.productCount}"/>
+            <td class="text-center" th:text="${cheque.productCount * cheque.product.price}"/>
+            <td class="text-center"
+                th:text="${cheque.employee.passportData.surname+' '+cheque.employee.passportData.name+' '+cheque.employee.passportData.patronymic}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
