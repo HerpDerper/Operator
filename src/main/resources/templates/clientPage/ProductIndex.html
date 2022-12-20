@@ -16,7 +16,7 @@
                     <input type="text" name="name" class="form-control" placeholder="Название"/>
                 </div>
                 <div class="col col-lg-3">
-                    <input class="btn btn-success" formmethod="get" type="submit" formaction="/client/productFilter"
+                    <input class="btn btn-success" formmethod="get" type="submit" formaction="/clientPage/productFilter"
                            value="Поиск"/>
                 </div>
             </div>
@@ -36,7 +36,7 @@
             <h6 class="card-title" th:if="${product.count==0}" th:text="${'Временно отсутствует в продаже'} "/>
         </div>
         <div class="btn-group">
-            <form th:action="@{/templates/clientPage/bookingCreateProduct}" method="post">
+            <form th:action="@{/clientPage/bookingCreateProduct}" method="post">
                 <input type="hidden" th:value="${product.idProduct}" name="idProduct">
                 <input value="Заказать" type="submit" class="btn btn-outline-dark">
             </form>

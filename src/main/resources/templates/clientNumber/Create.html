@@ -16,7 +16,7 @@
                 <div th:object="${client}">
                     <div class="form-group pt-1">
                         <label class="control-label">Номер<input type="text" name="number" list="phoneNumbers"
-                                                                 class="form-control"></label>
+                                                                 class="form-control" th:value="${phoneNumberNumber}" ></label>
                         <datalist id="phoneNumbers">
                             <select th:each="phoneNumber : ${phoneNumbers}">
                                 <option th:if="${phoneNumber.status==true}" th:value="${phoneNumber.number}">

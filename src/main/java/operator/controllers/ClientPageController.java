@@ -38,13 +38,13 @@ public class ClientPageController {
         this.bookingRepository = bookingRepository;
     }
 
-    @GetMapping("/client/tariffIndex")
+    @GetMapping("/clientPage/tariffIndex")
     public String clientTariffIndex(Model model) {
         model.addAttribute("tariffs", tariffRepository.findAll());
         return "clientPage/TariffIndex";
     }
 
-    @GetMapping("/client/phoneNumberIndex")
+    @GetMapping("/clientPage/phoneNumberIndex")
     public String clientPhoneNumberIndex(@RequestParam long idTariff, Model model) {
         Tariff tariff = tariffRepository.findById(idTariff).get();
         model.addAttribute("phoneNumbers", phoneNumberRepository.findByTariff(tariff));
@@ -52,20 +52,20 @@ public class ClientPageController {
         return "clientPage/PhoneNumberIndex";
     }
 
-    @GetMapping("/client/productIndex")
+    @GetMapping("/clientPage/productIndex")
     public String clientProductIndex(Model model) {
         model.addAttribute("products", productRepository.findAll());
         return "clientPage/ProductIndex";
     }
 
-    @GetMapping("/client/bookingIndex")
+    @GetMapping("/clientPage/bookingIndex")
     public String clientBookingIndex(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("bookings", bookingRepository.findByUserUsername(authentication.getName()));
         return "clientPage/BookingIndex";
     }
 
-    @GetMapping("/client/phoneNumberFilter")
+    @GetMapping("/clientPage/phoneNumberFilter")
     public String clientPhoneNumberFilter(@RequestParam(required = false) String number, @RequestParam String tariffName, Model model) {
         Iterable<PhoneNumber> phoneNumbers;
         Tariff tariff = tariffRepository.findTariffByName(tariffName);
@@ -78,7 +78,7 @@ public class ClientPageController {
         return "clientPage/PhoneNumberIndex";
     }
 
-    @GetMapping("/client/productFilter")
+    @GetMapping("/clientPage/productFilter")
     public String clientProductFilter(@RequestParam(required = false) String name, Model model) {
         Iterable<Product> products;
         if (name != null && !name.equals(""))
@@ -89,27 +89,27 @@ public class ClientPageController {
         return "clientPage/ProductIndex";
     }
 
-    @PostMapping("/client/bookingCreateProduct")
+    @PostMapping("/clientPage/bookingCreateProduct")
     public String clientBookingCreateProduct(@RequestParam long idProduct) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Product product = productRepository.findById(idProduct).get();
         User user = userRepository.findUserByUsername(authentication.getName());
         Booking booking = new Booking(user, product);
         bookingRepository.save(booking);
-        return "redirect:/client/bookingIndex";
+        return "redirect:/clientPage/bookingIndex";
     }
 
-    @PostMapping("/client/bookingCreatePhoneNumber")
+    @PostMapping("/clientPage/bookingCreatePhoneNumber")
     public String clientBookingCreatePhoneNumber(@RequestParam long idPhoneNumber) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PhoneNumber phoneNumber = phoneNumberRepository.findById(idPhoneNumber).get();
         User user = userRepository.findUserByUsername(authentication.getName());
         Booking booking = new Booking(user, phoneNumber);
         bookingRepository.save(booking);
-        return "redirect:/client/bookingIndex";
+        return "redirect:/clientPage/bookingIndex";
     }
 
-    @GetMapping("/client/tariffSort")
+    @GetMapping("/clientPage/tariffSort")
     public String clientTariffIFilter(@RequestParam String sortProperty, @RequestParam boolean sortType, Model model) {
         Iterable<Tariff> tariffs;
         switch (sortProperty) {

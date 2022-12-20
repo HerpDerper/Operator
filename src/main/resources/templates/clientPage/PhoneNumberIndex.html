@@ -17,7 +17,7 @@
                     <input type="hidden" name="tariffName" th:value="${tariff.name}"/>
                 </div>
                 <div class="col col-lg-3">
-                    <input class="btn btn-success" formmethod="get" type="submit" formaction="/client/phoneNumberFilter"
+                    <input class="btn btn-success" formmethod="get" type="submit" formaction="/clientPage/phoneNumberFilter"
                            value="Поиск"/>
                 </div>
             </div>
@@ -35,7 +35,7 @@
             <h5 class="card-title" th:text="${phoneNumber.tariff.priceMount+50+'₽'} "/>
         </div>
         <div class="btn-group">
-            <form th:action="@{/templates/clientPage/bookingCreatePhoneNumber}" method="post">
+            <form th:action="@{/clientPage/bookingCreatePhoneNumber}" method="post">
                 <input type="hidden" th:value="${phoneNumber.idPhoneNumber}" name="idPhoneNumber">
                 <input value="Выбрать" type="submit" class="btn btn-outline-dark">
             </form>

@@ -9,7 +9,7 @@
 <body>
 <div th:insert="headers/ClientHeader"></div>
 <div class="container">
-    <form th:action="@{/templates/clientPage/tariffSort}">
+    <form th:action="@{/clientPage/tariffSort}">
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col col-lg-6">
@@ -46,7 +46,7 @@
             <h6 class="card-title" th:text="${tariff.priceMount+'₽ в месяц'} "/>
         </div>
         <div class="btn-group">
-            <form th:action="@{/templates/clientPage/phoneNumberIndex}" method="get">
+            <form th:action="@{/clientPage/phoneNumberIndex}" method="get">
                 <input type="hidden" th:value="${tariff.idTariff}" name="idTariff">
                 <input value="Выбрать" type="submit" class="btn btn-outline-dark">
             </form>

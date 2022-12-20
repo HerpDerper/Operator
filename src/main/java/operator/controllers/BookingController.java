@@ -55,7 +55,7 @@ public class BookingController {
     public String bookingRegistrationClientNumber(@RequestParam long idBooking, Model model) {
         Booking booking = bookingRepository.findById(idBooking).get();
         PhoneNumber phoneNumber = booking.getPhoneNumber();
-        model.addAttribute("phoneNumber", phoneNumber);
+        model.addAttribute("phoneNumberNumber", phoneNumber.getNumber());
         model.addAttribute("passportData", new PassportData());
         model.addAttribute("client", new Client());
         model.addAttribute("clientNumber", new ClientNumber());

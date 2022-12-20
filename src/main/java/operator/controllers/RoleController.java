@@ -14,7 +14,7 @@ public class RoleController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (new RoleService().adminAccess(auth)) return "redirect:/employee/index";
         else if (new RoleService().sellerAccess(auth)) return "redirect:/clientNumber/create";
-        else return "redirect:/client/tariffIndex";
+        else return "redirect:/clientPage/tariffIndex";
     }
 
 }

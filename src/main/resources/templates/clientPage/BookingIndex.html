@@ -9,7 +9,7 @@
 <body>
 <div th:insert="headers/ClientHeader"></div>
 <div class="container">
-    <h1>Заказы</h1>
+    <h1>Мои заказы</h1>
     <div class="card card_margin mb-2" th:each="booking : ${bookings}">
         <div class="card-header">
             <h4 class="card-title" th:if="${booking.product!=null}" th:text="${booking.product.name}"/>

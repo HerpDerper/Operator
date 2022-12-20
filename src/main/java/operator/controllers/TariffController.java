@@ -77,7 +77,7 @@ public class TariffController {
         if (bindingResult.hasErrors())
             return "tariff/Create";
         tariffRepository.save(tariff);
-        for (int i = 0;i<9;i++){
+        for (int i = 0; i < 19; i++) {
             PhoneNumber phoneNumber = new PhoneNumber();
             Random random = new Random();
             phoneNumber.setTariff(tariff);

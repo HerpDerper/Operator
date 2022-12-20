@@ -24,7 +24,7 @@
                              th:errors="*{username}"></div>
                         <span class="error text-danger" th:if="errorMessageUsername!=null"
                               th:text="${errorMessageUsername}"></span>
-                        <label class="control-label">Логин<input type="text" class="form-control"
+                        <label class="control-label">Пароль<input type="text" class="form-control"
                                                                  th:field="*{password}"></label>
                         <div class="error text-danger" th:if="${#fields.hasErrors('password')}"
                              th:errors="*{password}"></div>
