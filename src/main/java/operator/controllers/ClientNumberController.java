@@ -31,16 +31,19 @@ public class ClientNumberController {
 
     private final TariffRepository tariffRepository;
 
+    private final BookingRepository bookingRepository;
+
     public ClientNumberController(ClientRepository clientRepository,
                                   ClientNumberRepository clientNumberRepository,
                                   PassportDataRepository passportDataRepository,
                                   PhoneNumberRepository phoneNumberRepository,
-                                  TariffRepository tariffRepository) {
+                                  TariffRepository tariffRepository, BookingRepository bookingRepository) {
         this.clientRepository = clientRepository;
         this.clientNumberRepository = clientNumberRepository;
         this.passportDataRepository = passportDataRepository;
         this.phoneNumberRepository = phoneNumberRepository;
         this.tariffRepository = tariffRepository;
+        this.bookingRepository = bookingRepository;
     }
 
     @GetMapping("/clientNumber/index")
@@ -101,6 +104,8 @@ public class ClientNumberController {
         clientNumberRepository.save(clientNumber);
         phoneNumber.setStatus(false);
         phoneNumberRepository.save(phoneNumber);
+        Iterable<Booking> bookings = bookingRepository.findByPhoneNumber(phoneNumber);
+        bookingRepository.deleteAll(bookings);
         return "redirect:/cart/index";
     }
 
