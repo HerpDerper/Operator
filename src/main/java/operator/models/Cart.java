@@ -17,7 +17,7 @@ public class Cart {
     private Product product;
 
     @Min(value = 0, message = "Количество товара должно быть больше или равно 0")
-    @NotNull(message = "Количество товара не должна быть пустым")
+    @NotNull(message = "Количество товара не должно быть пустым")
     private int productCount;
 
     public Cart() {

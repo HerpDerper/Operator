@@ -12,11 +12,11 @@ public class Product {
     private Long idProduct;
 
     @NotBlank(message = "Наименование товара не должено быть пустым или состоять из одних лишь пробелов")
-    @Size(min = 1, max = 30, message = "Наименование товара не должено быть от 1 до 30 символов")
+    @Size(min = 1, max = 30, message = "Наименование товара должно быть от 1 до 30 символов")
     private String name;
 
     @NotBlank(message = "Описание товара не должено быть пустым или состоять из одних лишь пробелов")
-    @Size(min = 1, message = "Описание товара не должено содержать минимум 1 символ")
+    @Size(min = 1, message = "Описание товара не должно содержать минимум 1 символ")
     private String description;
 
     @Min(value = 1, message = "Цена товара должна быть больше 0")
@@ -24,7 +24,7 @@ public class Product {
     private int price;
 
     @Min(value = 0, message = "Количество товара должно быть больше или равно 0")
-    @NotNull(message = "Количество товара не должна быть пустым")
+    @NotNull(message = "Количество товара не должно быть пустым")
     private int count;
 
     @Pattern(regexp = "[0-9] [0-9]{6} [0-9]{6}")
