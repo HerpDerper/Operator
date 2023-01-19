@@ -19,8 +19,8 @@
                                                                  th:field="*{username}"></label>
                         <div class="error text-danger" th:if="${#fields.hasErrors('username')}"
                              th:errors="*{username}"></div>
-                        <span class="error text-danger" th:if="errorMessageUsername!=null"
-                              th:text="${errorMessageUsername}"></span>
+                        <div class="error text-danger" th:if="errorMessageUsername!=null"
+                              th:text="${errorMessageUsername}"></div>
                     </div>
                     <div class="form-group pt-1">
                         <label class="control-label">Пароль<input type="text" class="form-control"
